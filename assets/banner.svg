@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d14"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e1035"/>
+    </linearGradient>
+
+    <!-- Card Background Gradient -->
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+
+    <linearGradient id="pulse-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4facfe" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Filters for Glow Effects -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    /* Keyframe Animations */
+    @keyframes pulseCircle {
+      0% { r: 4px; opacity: 0.3; }
+      50% { r: 8px; opacity: 0.9; }
+      100% { r: 4px; opacity: 0.3; }
+    }
+    @keyframes dashMove {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes floatPill {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes bgGlow {
+      0% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+      100% { opacity: 0.4; }
+    }
+
+    .node-pulse-1 { animation: pulseCircle 3s infinite ease-in-out; }
+    .node-pulse-2 { animation: pulseCircle 4s infinite ease-in-out 1s; }
+    .node-pulse-3 { animation: pulseCircle 3.5s infinite ease-in-out 0.5s; }
+    
+    .stream-line {
+      stroke-dasharray: 8 6;
+      animation: dashMove 12s linear infinite;
+    }
+    .pill-box { animation: floatPill 4s infinite ease-in-out; }
+    .glow-bg-orb { animation: bgGlow 6s infinite ease-in-out; }
+    
+    .title-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: 0.5px;
+    }
+    .subtitle-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      fill: #94a3b8;
+    }
+    .pill-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      fill: #e2e8f0;
+    }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1000" height="280" rx="16" fill="url(#bg-grad)" />
+
+  <!-- DYNAMIC BACKGROUND ANIMATIONS (Z-Index Below Text) -->
+  <g id="background-animations">
+    <!-- Glowing Orbs -->
+    <circle cx="150" cy="80" r="100" fill="#38bdf8" opacity="0.12" filter="url(#glow)" class="glow-bg-orb" />
+    <circle cx="850" cy="200" r="120" fill="#c084fc" opacity="0.12" filter="url(#glow)" class="glow-bg-orb" />
+
+    <!-- Grid / Circuit Network Lines -->
+    <path d="M 50,200 Q 200,240 400,210 T 800,230 T 950,180" fill="none" stroke="#334155" stroke-width="1.5" />
+    <path d="M 80,50 Q 300,20 600,60 T 920,40" fill="none" stroke="#334155" stroke-width="1.5" />
+
+    <path d="M 50,200 Q 200,240 400,210 T 800,230 T 950,180" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.6" class="stream-line" />
+    <path d="M 80,50 Q 300,20 600,60 T 920,40" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.6" class="stream-line" />
+
+    <!-- Pulsing Nodes -->
+    <circle cx="200" cy="225" r="5" fill="#38bdf8" class="node-pulse-1" filter="url(#soft-glow)"/>
+    <circle cx="400" cy="210" r="6" fill="#818cf8" class="node-pulse-2" filter="url(#soft-glow)"/>
+    <circle cx="600" cy="60" r="5" fill="#c084fc" class="node-pulse-3" filter="url(#soft-glow)"/>
+    <circle cx="800" cy="230" r="7" fill="#38bdf8" class="node-pulse-1" filter="url(#soft-glow)"/>
+  </g>
+
+  <!-- FOREGROUND CONTENT (Guaranteed Top Layer - Completely Visible) -->
+  <g id="foreground-content">
+    <!-- Main Card Container -->
+    <rect x="30" y="30" width="940" height="220" rx="12" fill="url(#card-grad)" stroke="#334155" stroke-width="1" />
+
+    <!-- Title Badge / Icon -->
+    <g transform="translate(60, 62)">
+      <rect width="44" height="44" rx="10" fill="#0284c7" opacity="0.2"/>
+      <rect width="44" height="44" rx="10" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="11" y="30" font-size="24">⚡</text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="120" y="92" class="title-text" fill="url(#text-grad)" filter="url(#soft-glow)">
+      AWESOME SERVERLESS COMPUTING
+    </text>
+
+    <!-- Subtitle -->
+    <text x="120" y="125" class="subtitle-text">
+      The Definitive Ecosystem Guide to SaaS Platforms, FaaS Runtimes &amp; Self-Hosted Serverless
+    </text>
+
+    <!-- Feature Pills / Badges in Foreground -->
+    <g transform="translate(120, 155)" class="pill-box">
+      <!-- Pill 1: FaaS -->
+      <g transform="translate(0, 0)">
+        <rect width="115" height="34" rx="17" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="16" y="22" class="pill-text">⚡ FaaS Engine</text>
+      </g>
+      <!-- Pill 2: Edge -->
+      <g transform="translate(130, 0)">
+        <rect width="145" height="34" rx="17" fill="#1e293b" stroke="#818cf8" stroke-width="1.2"/>
+        <text x="16" y="22" class="pill-text">🌐 Edge Computing</text>
+      </g>
+      <!-- Pill 3: Event Driven -->
+      <g transform="translate(290, 0)">
+        <rect width="160" height="34" rx="17" fill="#1e293b" stroke="#c084fc" stroke-width="1.2"/>
+        <text x="16" y="22" class="pill-text">🔥 Event-Driven</text>
+      </g>
+      <!-- Pill 4: GPU Serverless -->
+      <g transform="translate(465, 0)">
+        <rect width="165" height="34" rx="17" fill="#1e293b" stroke="#f472b6" stroke-width="1.2"/>
+        <text x="16" y="22" class="pill-text">🚀 GPU Serverless</text>
+      </g>
+      <!-- Pill 5: Open Source -->
+      <g transform="translate(645, 0)">
+        <rect width="140" height="34" rx="17" fill="#1e293b" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="16" y="22" class="pill-text">⭐ Open-Source</text>
+      </g>
+    </g>
+
+    <!-- Bottom Metadata Bar -->
+    <text x="120" y="220" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">
+      Curated by Community • Updated October 2026 • 20+ Production Frameworks &amp; Platforms
+    </text>
+  </g>
+</svg>
